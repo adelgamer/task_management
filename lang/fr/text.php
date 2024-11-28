@@ -21,4 +21,21 @@ return [
     'settings' => 'Paramètres',
     'sign_out' => 'Déconnexion',
     'add_user' => 'Ajouter un nouvel utilisateur',
+
+    'title' => 'Titre',
+    'due_date' => 'Date d\'échéance',
+    'completion_date' => 'Date de réalisation',
+    'status' => 'Statut',
+    'priority' => 'Priorité',
+    'assignee' => 'Assigné à',
+    'actions' => 'Actions',
+    'view' => 'Voir',
+    'not_finished' => 'Pas fini',
+    'add_task' => 'Ajouter une nouvelle tâche',
+
+    'enter_description' => 'Entrez une description',
+    'select_status' => 'Sélectionnez un statut',
+    'select_priority' => 'Sélectionnez une priorité',
+    'select_assignee' => 'Sélectionnez un assigné',
+
 ];

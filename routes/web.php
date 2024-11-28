@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\TasksController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -25,3 +26,11 @@ Route::get("/users/{user}/edit", [UsersController::class, "edit"])->name("users.
 Route::put('/users/{user}', [UsersController::class, 'update'])->name('users.update')->middleware('auth');
 
 Route::post("/users", [UsersController::class, 'store'])->name('users.store')->middleware('auth');
+
+Route::get("tasks", [TasksController::class, "index"])->name("tasks.index")->middleware("auth");
+
+Route::get("/tasks/create", [TasksController::class, "create"])->name("tasks.create")->middleware("auth");
+
+Route::post("/tasks/store", [TasksController::class, "store"])->name("tasks.store")->middleware("auth");
+
+Route::get("/tasks/{task}", [TasksController::class, "show"])->name("tasks.show")->middleware("auth");

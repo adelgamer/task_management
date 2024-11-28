@@ -17,9 +17,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->date('due_date')->nullable();
             $table->date('completion_date')->nullable();
-            $table->unsignedBigInteger('status');
+            $table->unsignedBigInteger('status')->nullable();
             $table->foreign('status')->references('id')->on('task_status');
-            $table->unsignedBigInteger('priority');
+            $table->unsignedBigInteger('priority')->nullable();
             $table->foreign('priority')->references('id')->on('task_priority');
             $table->unsignedBigInteger('assigned_to');
             $table->foreign('assigned_to')->references('id')->on('users');

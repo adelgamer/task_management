@@ -21,4 +21,20 @@ return [
     'settings' => 'Settings',
     'sign_out' => 'Sign out',
     'add_user' => 'Add a new user',
+
+    'title' => 'Title',
+    'due_date' => 'Due date',
+    'completion_date' => 'Completion date',
+    'status' => 'Status',
+    'priority' => 'Priority',
+    'assignee' => 'Assignee',
+    'actions' => 'Actions',
+    'view' => 'View',
+    'not_finished' => 'Not finished',
+    'add_task' => 'Add a new task',
+
+    'enter_description' => 'Enter a description',
+    'select_status' => 'Select a status',
+    'select_priority' => 'Select a priority',
+    'select_assignee' => 'Select an assignee',
 ];

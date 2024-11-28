@@ -28,7 +28,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#tasks" class="nav-link text-white">
+                    <a href="{{route('tasks.index')}}" class="nav-link text-white {{ Route::current()->getName() == 'tasks.index' ? 'active' : '' }}">
                         <i class="bi bi-list-task" style="margin-right: 10px;"></i>
                         {{__('text.tasks')}}
                     </a>
