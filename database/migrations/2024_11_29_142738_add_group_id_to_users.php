@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -11,12 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rights', function (Blueprint $table) {
-            $table->id();
-            $table->string("name_en", length: 100);
-            $table->string("name_fr", 100);
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger("group_id")->default(3);
+            $table->foreign("group_id")->references("id")->on("groups");
         });
+
+        User::where("id", 1)->update(["group_id" => 1]);
     }
 
     /**
@@ -24,6 +25,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rights');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

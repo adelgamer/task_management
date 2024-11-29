@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rights', function (Blueprint $table) {
-            $table->id();
-            $table->string("name_en", length: 100);
-            $table->string("name_fr", 100);
-            $table->timestamps();
+        Schema::table('rights', function (Blueprint $table) {
+            $table->string("code", 30);
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rights');
+        Schema::table('rights', function (Blueprint $table) {
+            //
+        });
     }
 };

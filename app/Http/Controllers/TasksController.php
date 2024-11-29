@@ -9,6 +9,7 @@ use App\Models\TaskPriority;
 use App\Models\User;
 use App\Models\Task;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Gate;
 
 class TasksController extends Controller
 {
@@ -53,6 +54,11 @@ class TasksController extends Controller
             "assignee_id" => "required|exists:users,id",
         ]);
 
+        // Checking role
+        if(!Gate::allows("add_task")){
+            abort(403);
+        };
+
         // Storing the task
         Task::create([
             "title" => $title,
@@ -70,11 +76,13 @@ class TasksController extends Controller
         return redirect()->route("tasks.index");
     }
 
-    public function show($id){
+    public function show($id)
+    {
         return "See: " . $id;
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $task = Task::find($id);
         $task->delete();
         return redirect()->route("tasks.index");

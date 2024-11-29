@@ -1,3 +1,27 @@
+@php
+    function priorityColor($priorityId = 1)
+    {
+        switch ($priorityId) {
+            case 1:
+                return 'background-color: green; color: white; font-weight: 800;';
+                break;
+            case 2:
+                return 'background-color: yellow; color: black; font-weight: 800;';
+                break;
+            case 3:
+                return 'background-color: orange; color: black; font-weight: 800;';
+                break;
+            case 4:
+                return 'background-color: red; color: white; font-weight: 800;';
+                break;
+
+            default:
+                return 'background-color: white; color: black; font-weight: 800;';
+                break;
+        }
+    }
+@endphp
+
 @extends('layout.layout')
 
 @section('title', __('text.tasks'))
@@ -38,26 +62,31 @@
                         <td style="font-size: 0.8rem">{{ $task->due_date }}</td>
                         <td style="font-size: 0.8rem">{{ __('text.not_finished') }}</td>
                         <td style="font-size: 0.8rem">{{ $task->getStatus->name_en ?? 'Not determined' }}</td>
-                        <td style="font-size: 0.8rem">{{ $task->getPriority->name_en ?? 'Not determined' }}</td>
-                        <td style="font-size: 0.8rem">{{ $task->creator->name . ' ' . $task->creator->family_name }}</td>
+                        <td style="font-size: 0.8rem; {{ priorityColor($task->getPriority->id ?? 1) }}">
+                            {{ $task->getPriority->name_en ?? 'Not determined' }}</td>
+                        <td style="font-size: 0.8rem">{{ $task->assignedTo->name . ' ' . $task->assignedTo->family_name }}
+                        </td>
                         <td>
-                            <div class="row">
-                                <div class="col-12">
-                                    <a style="font-size: 0.8rem" class="btn btn-warning fw-bold btn-sm"
-                                        href="{{ route('tasks.show', $task->id) }}"
-                                        role="button">{{ __('text.view') }}</a>
-                                    <a style="font-size: 0.8rem" class="btn btn-primary fw-bold btn-sm" href=""
-                                        role="button">{{ __('text.edit') }}</a>
+                            <div class="dropdown">
+                                <a class="btn btn-primary dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    ...
+                                </a>
 
-                                    <form action="{{ route('tasks.destroy', $task->id) }}" method="post" style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input style="font-size: 0.8rem" type="submit"
-                                            class="btn btn-danger fw-bold btn-sm" role="button"
-                                            value="{{ __('text.delete') }}"></a>
-                                    </form>
-
-                                </div>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item"
+                                            href="{{ route('tasks.show', $task->id) }}">{{ __('text.view') }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('text.edit') }}</a></li>
+                                    <li>
+                                        <form action="{{ route('tasks.destroy', $task->id) }}" method="post"
+                                            style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input class="dropdown-item" type="submit"
+                                                value="{{ __('text.delete') }}"></input>
+                                        </form>
+                                    </li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
