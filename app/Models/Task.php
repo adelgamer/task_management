@@ -29,7 +29,13 @@ class Task extends Model
         return $this->belongsTo(User::class, "assigned_to");
     }
 
-    public function getStatus():BelongsTo{
+    public function getStatus(): BelongsTo
+    {
         return $this->belongsTo(TaskStatus::class, "status");
+    }
+
+    public function getPriority(): BelongsTo
+    {
+        return $this->belongsTo(TaskPriority::class, "priority");
     }
 }

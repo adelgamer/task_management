@@ -58,8 +58,9 @@
                 </select>
             </div>
             <div class="col-6">
-                <label for="">{{ __('text.select_priority') }}</label>
+                <label for="">{{ __('text.select_priority') }} <span style="color: red">*</span></label>
                 <select name="priority_id" class="form-select" aria-label="{{ __('text.select_priority') }}">
+                    <option>{{ __('text.select_priority') }}</option>
                     @foreach ($priorities as $priority)
                         <option value="{{ $priority->id }}" {{ $priority->id == old('priority_id') ? 'selected' : '' }}>{{ $priority->name_en }}</option>
                     @endforeach

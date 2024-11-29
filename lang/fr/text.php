@@ -37,5 +37,5 @@ return [
     'select_status' => 'Sélectionnez un statut',
     'select_priority' => 'Sélectionnez une priorité',
     'select_assignee' => 'Sélectionnez un assigné',
-
+    'delete' => 'Supprimer',
 ];

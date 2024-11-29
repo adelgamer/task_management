@@ -34,3 +34,5 @@ Route::get("/tasks/create", [TasksController::class, "create"])->name("tasks.cre
 Route::post("/tasks/store", [TasksController::class, "store"])->name("tasks.store")->middleware("auth");
 
 Route::get("/tasks/{task}", [TasksController::class, "show"])->name("tasks.show")->middleware("auth");
+
+Route::delete("/tasks/{tasks}", [TasksController::class, "destroy"])->name("tasks.destroy")->middleware("auth");

@@ -33,18 +33,30 @@
             </thead>
             <tbody>
                 @foreach ($tasks as $task)
-                    <tr>
-                        <td style="font-size: 0.8rem">{{ $task->title }}</td>
+                    <tr style="height: 5vh;">
+                        <td style="font-size: 0.8rem; width: 20%;">{{ $task->title }}</td>
                         <td style="font-size: 0.8rem">{{ $task->due_date }}</td>
                         <td style="font-size: 0.8rem">{{ __('text.not_finished') }}</td>
                         <td style="font-size: 0.8rem">{{ $task->getStatus->name_en ?? 'Not determined' }}</td>
-                        <td style="font-size: 0.8rem">{{ $task->title ?? 'Not determined' }}</td>
+                        <td style="font-size: 0.8rem">{{ $task->getPriority->name_en ?? 'Not determined' }}</td>
                         <td style="font-size: 0.8rem">{{ $task->creator->name . ' ' . $task->creator->family_name }}</td>
                         <td>
                             <div class="row">
                                 <div class="col-12">
-                                    <a style="font-size: 0.8rem" class="btn btn-warning fw-bold" href="{{route("tasks.show", $task->id)}}" role="button">{{ __('text.view') }}</a>
-                                    <a style="font-size: 0.8rem" class="btn btn-primary fw-bold" href="" role="button">{{ __('text.edit') }}</a>
+                                    <a style="font-size: 0.8rem" class="btn btn-warning fw-bold btn-sm"
+                                        href="{{ route('tasks.show', $task->id) }}"
+                                        role="button">{{ __('text.view') }}</a>
+                                    <a style="font-size: 0.8rem" class="btn btn-primary fw-bold btn-sm" href=""
+                                        role="button">{{ __('text.edit') }}</a>
+
+                                    <form action="{{ route('tasks.destroy', $task->id) }}" method="post" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input style="font-size: 0.8rem" type="submit"
+                                            class="btn btn-danger fw-bold btn-sm" role="button"
+                                            value="{{ __('text.delete') }}"></a>
+                                    </form>
+
                                 </div>
                             </div>
                         </td>

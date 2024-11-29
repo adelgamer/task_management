@@ -44,11 +44,12 @@ class TasksController extends Controller
         $assignee_id = $request->assignee_id;
 
         $validation = $request->validate([
-            "title" => "required|max:255|min:3",
+            "title" => "required|max:255|min:3|unique:tasks",
             "description" => "nullable|min:3",
             "due_date" => "required|date",
             "completion_date" => "nullable|date",
-            "status_id" => "required|digits_between:1,9||exists:task_status,id",
+            "status_id" => "required|digits_between:1,9|exists:task_status,id",
+            "priority_id" => "required|digits_between:1,4|exists:task_priority,id",
             "assignee_id" => "required|exists:users,id",
         ]);
 
@@ -66,10 +67,16 @@ class TasksController extends Controller
 
 
 
-        return $this->index();
+        return redirect()->route("tasks.index");
     }
 
     public function show($id){
         return "See: " . $id;
+    }
+
+    public function destroy($id){
+        $task = Task::find($id);
+        $task->delete();
+        return redirect()->route("tasks.index");
     }
 }
