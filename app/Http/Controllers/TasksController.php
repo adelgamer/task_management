@@ -19,7 +19,7 @@ class TasksController extends Controller
         $tasks = Task::orderBy("id", "desc")->get();
         $can_delete_task = Gate::allows("delete_task");
         $can_add_task = Gate::allows("add_task");
-            return view("tasks.index", ["tasks" => $tasks], ["can_delete_task" => $can_delete_task, "can_add_task" => $can_add_task]);
+        return view("tasks.index", ["tasks" => $tasks], ["can_delete_task" => $can_delete_task, "can_add_task" => $can_add_task]);
     }
 
     public function create()
@@ -80,7 +80,8 @@ class TasksController extends Controller
 
     public function show($id)
     {
-        return "See: " . $id;
+        $task = Task::find($id);
+        return view("tasks.show", ["task" => $task]);
     }
 
     public function destroy($id)
@@ -93,5 +94,9 @@ class TasksController extends Controller
         $task = Task::find($id);
         $task->delete();
         return redirect()->route("tasks.index");
+    }
+
+    public function edit($id){
+        return "edit: " . $id;
     }
 }

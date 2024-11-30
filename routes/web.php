@@ -36,3 +36,7 @@ Route::post("/tasks/store", [TasksController::class, "store"])->name("tasks.stor
 Route::get("/tasks/{task}", [TasksController::class, "show"])->name("tasks.show")->middleware("auth");
 
 Route::delete("/tasks/{tasks}", [TasksController::class, "destroy"])->name("tasks.destroy")->middleware("auth");
+
+Route::get("/tasks/{task}", [TasksController::class, "show"])->name("tasks.show")->middleware("auth");
+
+Route::get("/tasks/{task}/edit", [TasksController::class, "edit"])->name("tasks.edit")->middleware("auth");

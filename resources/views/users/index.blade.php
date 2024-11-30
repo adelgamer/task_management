@@ -7,14 +7,14 @@
 
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active"><a href="{{ route('users.index') }}">{{__('text.users')}}</a></li>
+            <li class="breadcrumb-item active"><a href="{{ route('users.index') }}">{{ __('text.users') }}</a></li>
         </ol>
     </nav>
     <div class="row mb-4 justify-content-end">
         <div class="col-auto">
-            <a class="btn btn-primary " href="{{route('users.create')}}" role="button">{{__('text.add_user')}}</a>
+            <a class="btn btn-primary " href="{{ route('users.create') }}" role="button">{{ __('text.add_user') }}</a>
         </div>
-        
+
     </div>
 
     <div class="row px-2">
@@ -38,7 +38,7 @@
                         <td>{{ $user->username }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->phone_number ?? '---' }}</td>
-                        <td>Not yet</td>
+                        <td>{{ $user->getGroup->name_en }}</td>
                         <td>
                             <div class="row">
                                 <div class="col-12">

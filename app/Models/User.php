@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Task;
 
 class User extends Authenticatable
@@ -58,5 +59,10 @@ class User extends Authenticatable
     public function assignedTasks(): HasMany
     {
         return $this->hasMany(Task::class, "assigned_to");
+    }
+
+    public function getGroup(): HasOne
+    {
+        return $this->hasOne(Group::class, "id", "group_id");
     }
 }
