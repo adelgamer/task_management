@@ -35,12 +35,13 @@
             <li class="breadcrumb-item active"><a href="{{ route('tasks.index') }}">{{ __('text.tasks') }}</a></li>
         </ol>
     </nav>
-    <div class="row mb-4 justify-content-end">
-        <div class="col-auto">
-            <a class="btn btn-primary " href="{{ route('tasks.create') }}" role="button">{{ __('text.add_task') }}</a>
+    @if ($can_add_task)
+        <div class="row mb-4 justify-content-end">
+            <div class="col-auto">
+                <a class="btn btn-primary " href="{{ route('tasks.create') }}" role="button">{{ __('text.add_task') }}</a>
+            </div>
         </div>
-
-    </div>
+    @endif
 
     <div class="row px-2">
         <table class="table">
@@ -77,15 +78,17 @@
                                     <li><a class="dropdown-item"
                                             href="{{ route('tasks.show', $task->id) }}">{{ __('text.view') }}</a></li>
                                     <li><a class="dropdown-item" href="#">{{ __('text.edit') }}</a></li>
-                                    <li>
-                                        <form action="{{ route('tasks.destroy', $task->id) }}" method="post"
-                                            style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input class="dropdown-item" type="submit"
-                                                value="{{ __('text.delete') }}"></input>
-                                        </form>
-                                    </li>
+                                    @if ($can_delete_task)
+                                        <li>
+                                            <form action="{{ route('tasks.destroy', $task->id) }}" method="post"
+                                                style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input class="dropdown-item" type="submit"
+                                                    value="{{ __('text.delete') }}"></input>
+                                            </form>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                         </td>

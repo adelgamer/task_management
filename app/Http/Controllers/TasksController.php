@@ -16,8 +16,10 @@ class TasksController extends Controller
     public function index()
     {
 
-        $tasks = Task::all();
-        return view("tasks.index", ["tasks" => $tasks]);
+        $tasks = Task::orderBy("id", "desc")->get();
+        $can_delete_task = Gate::allows("delete_task");
+        $can_add_task = Gate::allows("add_task");
+            return view("tasks.index", ["tasks" => $tasks], ["can_delete_task" => $can_delete_task, "can_add_task" => $can_add_task]);
     }
 
     public function create()
@@ -55,8 +57,8 @@ class TasksController extends Controller
         ]);
 
         // Checking role
-        if(!Gate::allows("add_task")){
-            abort(403);
+        if (!Gate::allows("add_task")) {
+            abort(403, "You don't have permission to add a task");
         };
 
         // Storing the task
@@ -83,6 +85,11 @@ class TasksController extends Controller
 
     public function destroy($id)
     {
+
+        if (!Gate::allows("delete_task")) {
+            abort(403, "You don't have permission to delete a task");
+        }
+
         $task = Task::find($id);
         $task->delete();
         return redirect()->route("tasks.index");
