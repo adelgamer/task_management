@@ -24,25 +24,27 @@
                         class="nav-link text-white {{ Route::current()->getName() == 'dashboard' ? 'active' : '' }}"
                         aria-current="page">
                         <i class="bi bi-speedometer" style="margin-right: 10px;"></i>
-                        {{__('text.dashboard')}}
+                        {{ __('text.dashboard') }}
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('tasks.index')}}" class="nav-link text-white {{ Route::current()->getName() == 'tasks.index' ? 'active' : '' }}">
+                    <a href="{{ route('tasks.index') }}"
+                        class="nav-link text-white {{ Route::current()->getName() == 'tasks.index' ? 'active' : '' }}">
                         <i class="bi bi-list-task" style="margin-right: 10px;"></i>
-                        {{__('text.tasks')}}
+                        {{ __('text.tasks') }}
                     </a>
                 </li>
                 <li>
                     <a href="#teams" class="nav-link text-white">
                         <i class="bi bi-microsoft-teams" style="margin-right: 10px;"></i>
-                        {{__('text.teams')}}
+                        {{ __('text.teams') }}
                     </a>
                 </li>
                 <li>
-                    <a href="{{route("users.index")}}" class="nav-link text-white {{ Route::current()->getName() == 'users.index' ? 'active' : '' }}">
+                    <a href="{{ route('users.index') }}"
+                        class="nav-link text-white {{ Route::current()->getName() == 'users.index' ? 'active' : '' }}">
                         <i class="bi bi-people" style="margin-right: 10px;"></i>
-                        {{__('text.users')}}
+                        {{ __('text.users') }}
                     </a>
                 </li>
             </ul>
@@ -55,12 +57,14 @@
                     <strong>{{ Session::get('user')->username }}</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="#">{{__('text.settings')}}</a></li>
-                    <li><a class="dropdown-item" href="#">{{__('text.profile')}}</a></li>
+                    <li><a class="dropdown-item" href="#">{{ __('text.settings') }}</a></li>
+                    <li><a class="dropdown-item"
+                            href="{{ route('users.show', Session::get('user')->id) }}">{{ __('text.profile') }}</a>
+                    </li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="dropdown-item" href="{{ route('logout') }}">{{__('text.sign_out')}}</a></li>
+                    <li><a class="dropdown-item" href="{{ route('logout') }}">{{ __('text.sign_out') }}</a></li>
                 </ul>
             </div>
         </div>
