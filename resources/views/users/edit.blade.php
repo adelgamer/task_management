@@ -22,7 +22,7 @@
 
     <div class="row">
         <div class="mb-3 w-75">
-            <form method="POST" action="{{route('users.update', $user->id)}}">
+            <form method="POST" action="{{route('users.update', $user->id)}}" enctype="multipart/form-data"> 
                 @method('PUT')
                 @csrf
                 <div class="mb-3">
@@ -45,6 +45,10 @@
                     <input name="password" type="password" class="form-control" id="password"
                         value="{{ old('password') }}">
                 </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Profile image</label>
+                    <input name="profile_image" class="form-control" type="file" id="formFile" accept="image/*">
+                  </div>
                 <button type="submit" class="btn btn-primary">{{ __('text.update') }}</button>
             </form>
         </div>

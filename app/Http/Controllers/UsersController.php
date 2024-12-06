@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -63,23 +64,32 @@ class UsersController extends Controller
             'family_name' => 'required|min:3|max:20|alpha',
             'username' => 'required|min:3|max:20|alpha_num',
             'password' => 'nullable|min:6|max:220',
+            'profile_image' => 'nullable|mimes:jpg,png|max:2048'
         ]);
 
         // Getting the user
         $user = User::findOrFail($id);
 
-        if (!$request->password) {
+
+        $user->update([
+            'name' => $request->name,
+            'family_name' => $request->family_name,
+            'username' => $request->username,
+        ]);
+
+        // Updating password
+        if ($request->password) {
             $user->update([
-                'name' => $request->name,
-                'family_name' => $request->family_name,
-                'username' => $request->username,
+                "password" => Hash::make($request->password)
             ]);
-        } else {
+        }
+
+        // Adding profile image
+        $image = $request->file('profile_image');
+        if ($image) {
+            $path = $image->store('images/profiles', 'public');
             $user->update([
-                'name' => $request->name,
-                'family_name' => $request->family_name,
-                'username' => $request->username,
-                'password' => Hash::make($request->password),
+                "profile_image" => $path
             ]);
         }
 
@@ -96,11 +106,12 @@ class UsersController extends Controller
             'family_name' => 'required|min:3|max:20|alpha',
             'username' => 'required|min:3|max:20|alpha_num|unique:users',
             'password' => 'required|min:6|max:220',
-            'email' => 'email|unique:users'
+            'email' => 'email|unique:users',
+            'profile_image' => 'nullable|mimes:jpg,png|max:2048'
         ]);
 
         // Storing the user
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'family_name' => $request->family_name,
             'username' => $request->username,
@@ -108,10 +119,20 @@ class UsersController extends Controller
             'email' => $request->name,
         ]);
 
+        // Storing image
+        $image = $request->file("profile_image");
+        if ($image) {
+            $path = $image->store('images/profiles', 'public');
+            $user->update([
+                "profile_image" => $path
+            ]);
+        }
+
         return redirect()->route('users.index');
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $user = User::find($id);
         return view("users.show", ["user" => $user]);
     }

@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ asset('css/general.css') }}">
 </head>
 
 <body class="container-fluid">
@@ -35,7 +36,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#teams" class="nav-link text-white">
+                    <a href="{{ route('teams.index') }}"
+                        class="nav-link text-white {{ Route::current()->getName() == 'teams.index' ? 'active' : '' }}">
                         <i class="bi bi-microsoft-teams" style="margin-right: 10px;"></i>
                         {{ __('text.teams') }}
                     </a>
@@ -52,12 +54,18 @@
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                     id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('images/man.png') }}" alt="" width="32" height="32"
-                        class="rounded-circle me-2" />
+                    <img src="{{ Session::get('user')->profile_image === 'images/man.png' ? asset('images/man.png') : asset('storage/' . Session::get('user')->profile_image) }}"
+                        alt="" width="32" height="32" class="rounded-circle me-2" />
                     <strong>{{ Session::get('user')->username }}</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="#">{{ __('text.settings') }}</a></li>
+                    <li><a class="dropdown-item" href="#">English</a>
+                    </li>
+                    <li><a class="dropdown-item" href="#">French</a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
                     <li><a class="dropdown-item"
                             href="{{ route('users.show', Session::get('user')->id) }}">{{ __('text.profile') }}</a>
                     </li>

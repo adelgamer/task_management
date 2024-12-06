@@ -1,0 +1,4 @@
+.td-hover:hover {
+    background-color: chartreuse !important;
+    cursor: pointer;
+}

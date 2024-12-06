@@ -22,7 +22,7 @@
 
 
     <div class="mb-3 w-75">
-        <form action="{{ route('users.store') }}" method="POST">
+        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">{{ __('text.name') }}</label>
@@ -47,6 +47,11 @@
             <div class="mb-3">
                 <label for="password" class="form-label">{{ __('text.password') }}</label>
                 <input value="{{ old('password') }}" name="password" type="password" class="form-control" id="password">
+            </div>
+
+            <div class="mb-3">
+                <label for="formFile" class="form-label fw-bold">Profile image</label>
+                <input name="profile_image" class="form-control" type="file" id="formFile" accept="image/*">
             </div>
             <button type="submit" class="btn btn-primary">{{ __('text.create') }}</button>
         </form>

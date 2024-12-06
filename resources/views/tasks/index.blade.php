@@ -20,6 +20,19 @@
                 break;
         }
     }
+
+    function deadlineColor($deadline)
+    {
+        // Get today date
+        $today = new \DateTime('today');
+        $deadline = new \DateTime($deadline);
+
+        if ($deadline <= $today) {
+            return 'background-color: #ed390c; color: white;';
+        } else {
+            return '';
+        }
+    }
 @endphp
 
 @extends('layout.layout')
@@ -60,7 +73,7 @@
                 @foreach ($tasks as $task)
                     <tr style="height: 5vh;">
                         <td style="font-size: 0.8rem; width: 20%;">{{ $task->title }}</td>
-                        <td style="font-size: 0.8rem">{{ $task->due_date }}</td>
+                        <td style="font-size: 0.8rem; {{ deadlineColor($task->due_date) }}">{{ $task->due_date }}</td>
                         <td style="font-size: 0.8rem">{{ __('text.not_finished') }}</td>
                         <td style="font-size: 0.8rem">{{ $task->getStatus->name_en ?? 'Not determined' }}</td>
                         <td style="font-size: 0.8rem; {{ priorityColor($task->getPriority->id ?? 1) }}">
@@ -71,7 +84,7 @@
                             <div class="dropdown">
                                 <a class="btn btn-primary dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    ...
+                                    
                                 </a>
 
                                 <ul class="dropdown-menu">

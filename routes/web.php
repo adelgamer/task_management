@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\TeamsController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -42,3 +43,5 @@ Route::get("/tasks/{task}", [TasksController::class, "show"])->name("tasks.show"
 Route::get("/tasks/{task}/edit", [TasksController::class, "edit"])->name("tasks.edit")->middleware("auth");
 
 Route::get("/users/{user}", [UsersController::class, "show"])->name("users.show")->middleware("auth");
+
+Route::get("/teams", [TeamsController::class, 'index'])->name("teams.index")->middleware("auth");

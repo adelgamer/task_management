@@ -1,6 +1,6 @@
 @extends('layout.layout')
 
-@section('title', 'Show')
+@section('title', $user->family_name . ' ' . $user->name)
 
 @section('content')
     <h1 class="h1 fw-bold">{{ $user->family_name . ' ' . $user->name }}</h1>
@@ -12,8 +12,9 @@
         </ol>
     </nav>
     <div class="row justify-content-center">
-        <div class="col-12 mt-3">
-            <div></div><img class="w-25" src="{{ asset('images/man.png') }}" alt="">
+        <div class="col-12 mt-3"><img style="height: 256px; width: 256px; border-radius: 50%;"
+                src="{{ $user->profile_image === 'images/man.png' ? asset('images/man.png') : asset('storage/' . $user->profile_image) }}"
+                alt="">
         </div>
         <div class="col-12 mt-5 fs-2">
             <p class="fw-bold">{{ $user->family_name . ' ' . $user->name }}</p>
