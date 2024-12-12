@@ -11,9 +11,11 @@
         </ol>
     </nav>
     <div class="row mb-4 justify-content-end">
-        <div class="col-auto">
-            <a class="btn btn-primary " href="{{ route('users.create') }}" role="button">{{ __('text.add_user') }}</a>
-        </div>
+        @if ($add_user_right)
+            <div class="col-auto">
+                <a class="btn btn-primary " href="{{ route('users.create') }}" role="button">{{ __('text.add_user') }}</a>
+            </div>
+        @endif
 
     </div>
 

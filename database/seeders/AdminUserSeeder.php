@@ -21,6 +21,7 @@ class AdminUserSeeder extends Seeder
             "password" => Hash::make('islamicstate'),
             "email" => 'adelgamer814@gmail.com',
             "status" => 1,
+            "group_id" => 1
         ]);
     }
 }

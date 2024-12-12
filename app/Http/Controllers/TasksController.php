@@ -96,7 +96,8 @@ class TasksController extends Controller
         return redirect()->route("tasks.index");
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         return "edit: " . $id;
     }
 }

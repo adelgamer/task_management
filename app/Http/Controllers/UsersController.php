@@ -12,15 +12,19 @@ use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
+        $add_user_right = Session::get("user")->can("create", User::class);
         $users = User::orderBy('id', 'desc')->get();
-        return view("users.index", ["users" => $users]);
+        return view("users.index", ["users" => $users, "add_user_right" => $add_user_right]);
     }
 
     public function create()
     {
+        if (!Session::get("user")->can("create", User::class)) {
+            abort(403, "You don't have permission");
+        }
         return view("users.create");
     }
 
@@ -33,6 +37,7 @@ class UsersController extends Controller
         if (Auth::attempt(["username" => $username, "password" => $password])) {
             // Generate a session
             Session::put("user", Auth::user());
+            Session::put("language", "EN");
 
             // Redirect to dashboard
             return redirect()->route("dashboard");
@@ -100,6 +105,9 @@ class UsersController extends Controller
     public function store(Request $request)
     {
 
+        if (!Session::get("user")->can("create", User::class)) {
+            abort(403, "You don't have permission");
+        };
         // Validating
         $request->validate([
             'name' => 'required|min:3|max:20|alpha',

@@ -35,13 +35,13 @@
                         {{ __('text.tasks') }}
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ route('teams.index') }}"
                         class="nav-link text-white {{ Route::current()->getName() == 'teams.index' ? 'active' : '' }}">
                         <i class="bi bi-microsoft-teams" style="margin-right: 10px;"></i>
                         {{ __('text.teams') }}
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a href="{{ route('users.index') }}"
                         class="nav-link text-white {{ Route::current()->getName() == 'users.index' ? 'active' : '' }}">
@@ -59,9 +59,9 @@
                     <strong>{{ Session::get('user')->username }}</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="#">English</a>
+                    <li><a class="dropdown-item" href="{{ route("set_language", "EN")}}">English</a>
                     </li>
-                    <li><a class="dropdown-item" href="#">French</a>
+                    <li><a class="dropdown-item" href="{{route("set_language", "FR")}}">French</a>
                     </li>
                     <li>
                         <hr class="dropdown-divider" />

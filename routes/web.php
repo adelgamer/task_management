@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LanguagesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TasksController;
@@ -45,3 +46,6 @@ Route::get("/tasks/{task}/edit", [TasksController::class, "edit"])->name("tasks.
 Route::get("/users/{user}", [UsersController::class, "show"])->name("users.show")->middleware("auth");
 
 Route::get("/teams", [TeamsController::class, 'index'])->name("teams.index")->middleware("auth");
+
+// Language change route
+Route::get("/set_language/{language}", [LanguagesController::class, "set_language"])->name("set_language")->middleware("auth");
